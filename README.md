@@ -2,8 +2,6 @@
 
 I built this after trying to understand why fine-tuning a language model costs so much money. Turns out, you don't have to update all 2.7 billion weights — you can freeze almost everything and inject tiny trainable matrices into just the attention layers. That's LoRA. The adapter you end up with is around 20MB. The base model is 5.5GB. I wanted to see that with my own eyes, so I built a pipeline that shows you the exact numbers.
 
-The context I built this for: [Janooma](https://janooma.com) is building an AI marketplace where vendors need specialized models. LoRA is exactly how you'd adapt a base model for each vendor's domain without spinning up a new training run from scratch every time.
-
 ## What it does
 
 You give it a base model and a set of training examples. It injects LoRA adapters into the attention layers, trains only those (about 0.06% of total parameters), saves the adapter, then lets you compare the fine-tuned outputs against the base model using ROUGE scores.
